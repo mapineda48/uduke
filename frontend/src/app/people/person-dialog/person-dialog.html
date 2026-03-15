@@ -1,0 +1,40 @@
+@if (visible) {
+  <div class="dialog-overlay" (click)="onCancel()">
+    <div class="dialog" (click)="$event.stopPropagation()">
+      <h2>{{ person ? 'Edit Person' : 'New Person' }}</h2>
+      <form (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="firstName">First Name *</label>
+          <input id="firstName" [(ngModel)]="form.firstName" name="firstName" required maxlength="100" />
+        </div>
+        <div class="form-group">
+          <label for="lastName">Last Name *</label>
+          <input id="lastName" [(ngModel)]="form.lastName" name="lastName" required maxlength="100" />
+        </div>
+        <div class="form-group">
+          <label for="email">Email *</label>
+          <input id="email" type="email" [(ngModel)]="form.email" name="email" required maxlength="200" />
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone</label>
+          <input id="phone" [(ngModel)]="form.phone" name="phone" maxlength="20" />
+        </div>
+        <div class="form-group">
+          <label for="birthDate">Birth Date</label>
+          <input id="birthDate" type="date" [(ngModel)]="form.birthDate" name="birthDate" />
+        </div>
+        <div class="form-group">
+          <label for="photo">Photo</label>
+          <input id="photo" type="file" accept="image/*" (change)="onFileSelected($event)" />
+          @if (photoPreview) {
+            <img [src]="photoPreview" alt="Preview" class="photo-preview" />
+          }
+        </div>
+        <div class="dialog-actions">
+          <button type="button" class="btn-secondary" (click)="onCancel()">Cancel</button>
+          <button type="submit" class="btn-primary" [disabled]="!form.firstName || !form.lastName || !form.email">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+}

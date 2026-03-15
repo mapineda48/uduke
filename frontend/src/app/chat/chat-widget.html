@@ -1,0 +1,68 @@
+<button class="chat-fab" (click)="toggleChat()" [class.active]="open()">
+  @if (open()) { &#10005; } @else { &#128172; }
+</button>
+
+@if (open()) {
+  <div class="chat-panel">
+    @if (!registered()) {
+      <div class="chat-login">
+        <h3>Join Chat</h3>
+        <input
+          [(ngModel)]="userName"
+          placeholder="Your name..."
+          (keyup.enter)="register()"
+          maxlength="50"
+        />
+        <button class="btn-primary" (click)="register()" [disabled]="!userName.trim()">Join</button>
+      </div>
+    } @else {
+      <div class="chat-header">
+        <span class="chat-title">Chat</span>
+        <span class="online-count">{{ users().length }} online</span>
+        <button class="btn-logout" (click)="logout()">Leave</button>
+      </div>
+
+      <div class="chat-messages" #messagesContainer>
+        @for (msg of messages(); track $index) {
+          <div class="message" [class.own]="msg.userId === userId" [class.system]="msg.type === 'system'">
+            @if (msg.type === 'system') {
+              <div class="system-text">{{ msg.text }}</div>
+            } @else {
+              <div class="message-header">
+                <span class="sender">{{ msg.userName }}</span>
+              </div>
+              @if (msg.text) {
+                <div class="message-text">{{ msg.text }}</div>
+              }
+              @for (url of msg.mediaUrls; track url) {
+                @if (isImage(url)) {
+                  <img [src]="url" alt="Media" class="message-media" />
+                } @else {
+                  <a [href]="url" target="_blank" class="message-link">Attachment</a>
+                }
+              }
+            }
+          </div>
+        }
+      </div>
+
+      @if (typingUser()) {
+        <div class="typing-indicator">{{ typingUser() }} is typing...</div>
+      }
+
+      <div class="chat-input">
+        <label class="upload-btn" title="Upload file">
+          &#128206;
+          <input type="file" accept="image/*,audio/*" (change)="uploadFile($event)" hidden />
+        </label>
+        <input
+          [(ngModel)]="messageText"
+          placeholder="Type a message..."
+          (keyup.enter)="sendMessage()"
+          (input)="onTyping()"
+        />
+        <button class="send-btn" (click)="sendMessage()" [disabled]="!messageText.trim()">&#10148;</button>
+      </div>
+    }
+  </div>
+}

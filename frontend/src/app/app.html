@@ -1,0 +1,13 @@
+<nav class="navbar">
+  <a class="nav-brand" routerLink="/">Uduke</a>
+  <div class="nav-links">
+    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
+    <a routerLink="/people" routerLinkActive="active">People</a>
+  </div>
+</nav>
+
+<main class="main-content">
+  <router-outlet />
+</main>
+
+<app-chat-widget />

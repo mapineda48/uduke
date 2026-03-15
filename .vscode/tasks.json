@@ -1,0 +1,136 @@
+{
+  "version": "2.0.0",
+  "options": {
+    "env": {
+      "PATH": "${env:HOME}/.nvm/versions/node/v25.2.1/bin:${env:HOME}/.sdkman/candidates/java/current/bin:${env:PATH}"
+    }
+  },
+  "tasks": [
+    // ── Maven ──
+    {
+      "label": "mvn: clean install",
+      "type": "shell",
+      "command": "mvn clean install",
+      "options": { "cwd": "${workspaceFolder}/backend" },
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "mvn: clean install (skip tests)",
+      "type": "shell",
+      "command": "mvn clean install -DskipTests",
+      "options": { "cwd": "${workspaceFolder}/backend" },
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "mvn: test",
+      "type": "shell",
+      "command": "mvn test",
+      "options": { "cwd": "${workspaceFolder}/backend" },
+      "group": "test",
+      "problemMatcher": []
+    },
+    {
+      "label": "mvn: spring-boot:run",
+      "type": "shell",
+      "command": "mvn spring-boot:run -Dspring-boot.run.profiles=dev",
+      "options": { "cwd": "${workspaceFolder}/backend" },
+      "group": "none",
+      "isBackground": true,
+      "problemMatcher": []
+    },
+    // ── Gradle ──
+    {
+      "label": "gradle: build",
+      "type": "shell",
+      "command": "./gradlew build",
+      "options": { "cwd": "${workspaceFolder}/backend" },
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "gradle: test",
+      "type": "shell",
+      "command": "./gradlew test",
+      "options": { "cwd": "${workspaceFolder}/backend" },
+      "group": "test",
+      "problemMatcher": []
+    },
+    {
+      "label": "gradle: bootRun",
+      "type": "shell",
+      "command": "./gradlew bootRun --args='--spring.profiles.active=dev'",
+      "options": { "cwd": "${workspaceFolder}/backend" },
+      "group": "none",
+      "isBackground": true,
+      "problemMatcher": []
+    },
+    // ── Full Stack: esperar backend + angular ──
+    {
+      "label": "wait: full stack",
+      "dependsOn": ["wait: backend", "ng: serve"],
+      "dependsOrder": "sequence",
+      "problemMatcher": []
+    },
+    // ── Esperar backend ──
+    {
+      "label": "wait: backend",
+      "type": "shell",
+      "command": "echo 'Waiting for backend on :8081...' && until curl -sf http://localhost:8081/api/health > /dev/null 2>&1; do sleep 1; done && echo 'Backend is ready!'",
+      "problemMatcher": []
+    },
+    // ── Angular ──
+    {
+      "label": "ng: serve",
+      "type": "shell",
+      "command": "npx ng serve",
+      "options": { "cwd": "${workspaceFolder}/frontend" },
+      "group": "none",
+      "isBackground": true,
+      "problemMatcher": {
+        "owner": "angular",
+        "pattern": {
+          "regexp": "^$"
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": ".*Building.*",
+          "endsPattern": ".*Watch mode enabled.*"
+        }
+      }
+    },
+    {
+      "label": "ng: build",
+      "type": "shell",
+      "command": "npx ng build",
+      "options": { "cwd": "${workspaceFolder}/frontend" },
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "ng: build (production)",
+      "type": "shell",
+      "command": "npx ng build --configuration=production",
+      "options": { "cwd": "${workspaceFolder}/frontend" },
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "ng: test",
+      "type": "shell",
+      "command": "npx ng test",
+      "options": { "cwd": "${workspaceFolder}/frontend" },
+      "group": "test",
+      "problemMatcher": []
+    },
+    {
+      "label": "ng: lint",
+      "type": "shell",
+      "command": "npx ng lint",
+      "options": { "cwd": "${workspaceFolder}/frontend" },
+      "group": "none",
+      "problemMatcher": ["$eslint-stylish"]
+    }
+  ]
+}

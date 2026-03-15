@@ -1,0 +1,19 @@
+{
+  "recommendations": [
+    // Java & Spring Boot
+    "vscjava.vscode-java-pack",
+    "vmware.vscode-spring-boot",
+    "vscjava.vscode-spring-boot-dashboard",
+    "vscjava.vscode-spring-initializr",
+
+    // Angular
+    "angular.ng-template",
+
+    // Utilidades generales
+    "editorconfig.editorconfig",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "eamodio.gitlens"
+  ],
+  "unwantedRecommendations": []
+}

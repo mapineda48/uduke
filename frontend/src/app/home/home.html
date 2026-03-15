@@ -1,0 +1,22 @@
+<div class="home-container">
+  <h1>Uduke</h1>
+  <p class="subtitle">People management and real-time chat</p>
+
+  @if (loading()) {
+    <p>Loading...</p>
+  }
+
+  @if (health()) {
+    <div class="health-card">
+      <h2>Backend Health Check</h2>
+      <p><strong>Status:</strong> {{ health()!.status }}</p>
+      <p><strong>Timestamp:</strong> {{ health()!.timestamp }}</p>
+    </div>
+  }
+
+  @if (error()) {
+    <div class="error-card">
+      <p>{{ error() }}</p>
+    </div>
+  }
+</div>

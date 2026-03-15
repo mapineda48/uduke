@@ -1,0 +1,59 @@
+<div class="people-container">
+  <div class="people-header">
+    <h1>People</h1>
+    <button class="btn-primary" (click)="openCreate()">+ New Person</button>
+  </div>
+
+  @if (loading()) {
+    <p class="loading">Loading...</p>
+  }
+
+  @if (!loading() && people().length === 0) {
+    <p class="empty">No people yet. Click "New Person" to add one.</p>
+  }
+
+  @if (!loading() && people().length > 0) {
+    <div class="people-table-wrapper">
+      <table class="people-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Birth Date</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (person of people(); track person.id) {
+            <tr>
+              <td class="avatar-cell">
+                @if (person.photoUrl) {
+                  <img [src]="person.photoUrl" alt="Photo" class="avatar" />
+                } @else {
+                  <div class="avatar-placeholder">{{ person.firstName[0] }}{{ person.lastName[0] }}</div>
+                }
+              </td>
+              <td>{{ person.firstName }} {{ person.lastName }}</td>
+              <td>{{ person.email }}</td>
+              <td>{{ person.phone || '-' }}</td>
+              <td>{{ person.birthDate || '-' }}</td>
+              <td class="actions-cell">
+                <button class="btn-icon" title="Edit" (click)="openEdit(person)">&#9998;</button>
+                <button class="btn-icon btn-danger" title="Delete" (click)="onDelete(person)">&#128465;</button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>
+
+<app-person-dialog
+  [visible]="dialogVisible()"
+  [person]="editingPerson()"
+  (save)="onSave($event)"
+  (cancel)="closeDialog()"
+/>

@@ -1,0 +1,62 @@
+{
+  // Java
+  "java.configuration.updateBuildConfiguration": "automatic",
+  "java.compile.nullAnalysis.mode": "automatic",
+  "java.format.settings.profile": "GoogleStyle",
+  "java.saveActions.organizeImports": true,
+  "java.import.gradle.enabled": true,
+  "java.import.gradle.wrapper.enabled": true,
+
+  // Terminal - asegurar que nvm y sdkman estén disponibles
+  "terminal.integrated.env.linux": {
+    "PATH": "${env:HOME}/.nvm/versions/node/v25.2.1/bin:${env:HOME}/.sdkman/candidates/java/current/bin:${env:PATH}"
+  },
+
+  // Spring Boot
+  "spring-boot.ls.problem.boot2.ERROR": "WARNING",
+  "boot-java.rewrite.reconcile": true,
+
+  // Angular / TypeScript
+  "typescript.preferences.importModuleSpecifier": "relative",
+  "angular.enable.strict.mode": true,
+
+  // Editor
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "explicit"
+  },
+
+  // Formatters por lenguaje
+  "[java]": {
+    "editor.defaultFormatter": "redhat.java"
+  },
+  "[xml]": {
+    "editor.defaultFormatter": "redhat.java"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[scss]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
+  // Archivos
+  "files.exclude": {
+    "**/.git": true,
+    "**/.DS_Store": true,
+    "**/node_modules": true,
+    "**/.idea": true,
+    "**/target": true
+  },
+  "files.watcherExclude": {
+    "**/node_modules/**": true,
+    "**/target/**": true
+  },
+
+  // ESLint
+  "eslint.validate": ["javascript", "typescript", "html"]
+}

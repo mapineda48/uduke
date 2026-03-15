@@ -1,0 +1,47 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Spring Boot - Debug",
+      "request": "launch",
+      "mainClass": "com.myapp.backend.BackendApplication",
+      "projectName": "backend",
+      "cwd": "${workspaceFolder}/backend",
+      "vmArgs": "-Dspring.profiles.active=dev",
+      "console": "internalConsole"
+    },
+    {
+      "type": "java",
+      "name": "Spring Boot - Current File",
+      "request": "launch",
+      "mainClass": "${file}"
+    },
+    {
+      "type": "chrome",
+      "name": "Angular - Chrome",
+      "request": "launch",
+      "preLaunchTask": "wait: full stack",
+      "url": "http://localhost:4200",
+      "webRoot": "${workspaceFolder}/frontend/src",
+      "sourceMapPathOverrides": {
+        "webpack:/*": "${webRoot}/*"
+      }
+    },
+    {
+      "type": "node",
+      "name": "Angular - ng serve",
+      "request": "launch",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["ng", "serve"],
+      "cwd": "${workspaceFolder}/frontend",
+      "console": "integratedTerminal"
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Full Stack (Spring Boot + Angular)",
+      "configurations": ["Spring Boot - Debug", "Angular - Chrome"]
+    }
+  ]
+}

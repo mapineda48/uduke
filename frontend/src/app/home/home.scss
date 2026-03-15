@@ -1,0 +1,39 @@
+.home-container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 1rem;
+  font-family: sans-serif;
+
+  h1 {
+    text-align: center;
+    color: #1a1a2e;
+  }
+
+  .subtitle {
+    text-align: center;
+    color: #666;
+    margin-top: -0.5rem;
+  }
+}
+
+.health-card {
+  background: #e8f5e9;
+  border: 1px solid #4caf50;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-top: 1rem;
+
+  h2 {
+    margin-top: 0;
+    color: #2e7d32;
+  }
+}
+
+.error-card {
+  background: #ffebee;
+  border: 1px solid #f44336;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-top: 1rem;
+  color: #c62828;
+}
